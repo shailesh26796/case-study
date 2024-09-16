@@ -1,0 +1,101 @@
+openapi: 3.0.1
+info:
+  title: Player API
+  description: API for managing player details.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Player API
+paths:
+  /player/name/{name}:
+    get:
+      summary: Get player by firstname
+      description: Fetch a list of players by name
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Details of player based on first name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of players
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+        '404':
+          description: Player not found
+        '500':
+          description: Internal server error
+
+  /player:
+    post:
+      summary: Create a new player record
+      description: Add a new player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '201':
+          description: Player created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+  /player/{id}:
+    delete:
+      summary: Delete a player record
+      description: Deletes a player by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the player to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Player deleted successfully
+        '404':
+          description: Player not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the player.
+        firstName:
+          type: string
+          description: The firstname of the player.
+        lastName:
+          type: string
+          description: The lastname of the player.
+        country:
+          type: string
+          description: The country the player belongs to.
+        dateOfBirth:
+          type: date
+          description: BirthDate of a player.
+        runs:
+          type: integer
+          description: Total runs scored by player
+        position:
+          type: string
+          description: player position.

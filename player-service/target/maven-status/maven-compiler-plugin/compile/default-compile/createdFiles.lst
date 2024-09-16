@@ -1,0 +1,5 @@
+com\ntt\player\entity\Player.class
+com\ntt\player\controller\PlayerController.class
+com\ntt\player\repository\PlayerRepository.class
+com\ntt\player\PlayerApplication.class
+com\ntt\player\service\PlayerService.class
